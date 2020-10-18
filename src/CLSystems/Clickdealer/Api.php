@@ -2,7 +2,7 @@
 
 namespace CLSystems\Clickdealer;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 
 class Api
 {
@@ -27,7 +27,7 @@ class Api
 	{
 		$this->affiliateId = $affiliateId;
 		$this->apiKey      = $apiKey;
-		$this->client      = new Client(self::BASE_URI);
+		$this->client      = new Client([]);
 	}
 
 	/**
@@ -41,13 +41,14 @@ class Api
 	 */
 	public function getCampaigns(array $params = []): array
 	{
-		$response = $this->client->get(
-			'/GetCampaign',
-			['Accept' => 'application/json'],
-			[
-				'api_key'      => $this->apiKey,
-				'affiliate_id' => $this->affiliateId
-			] + $params);
+		$options = [
+			'headers' => ['Accept' => 'application/json'],
+			'params'  => [
+					'api_key'      => $this->apiKey,
+					'affiliate_id' => $this->affiliateId
+				] + $params,
+		];
+		$response = $this->client->get(self::BASE_URI . '/GetCampaign', $options)->getBody();
 		$result = json_decode($response, true);
 
 		if (false === $result)
