@@ -4,7 +4,7 @@ use CLSystems\Clickdealer\Api;
 
 // Example for Click Dealer API Client
 $affiliateId = '123123123'; // Replace this
-$apiKey = '110332'; // Replace this
+$apiKey = 'ABCD1234'; // Replace this
 
 $api = new Api($affiliateId, $apiKey);
 
