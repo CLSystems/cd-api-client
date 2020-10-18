@@ -1,0 +1,26 @@
+{
+  "name": "clsystems/cd-api-client",
+  "type": "library",
+  "description": "Click Dealer api library",
+  "keywords": [
+    "clsystems",
+    "affiliate",
+    "clickdealer",
+    "api",
+    "client"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jeroen Guyt - CLSystems",
+      "email": "info@clsystems.nl"
+    }
+  ],
+  "autoload": {
+    "psr-0": { "CLSystems\\Clickdealer\\": "src/" }
+  },
+  "require": {
+    "php": ">=7.3.0",
+    "guzzle/guzzle": ">=v3.9.0"
+  }
+}
