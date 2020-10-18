@@ -9,30 +9,25 @@ class Api
 	const BASE_URI = 'https://partners.clickdealer.com/affiliates/api/1/offers.asmx';
 
 	/**
-	 * @var string
-	 */
-	private $apiKey;
-
-	/**
 	 * @var int
 	 */
 	private $affiliateId;
+
+	/**
+	 * @var string
+	 */
+	private $apiKey;
 
 	/**
 	 * @var Client
 	 */
 	private $client;
 
-	public function __construct(string $apiKey, int $affiliateId)
+	public function __construct(int $affiliateId, string $apiKey)
 	{
-		$this->apiKey = $apiKey;
 		$this->affiliateId = $affiliateId;
-		$this->client = new Client(self::BASE_URI);
-		$this->client->setConfig([
-			'headers' => [
-				'Accept' => 'application/json',
-			]
-		]);
+		$this->apiKey      = $apiKey;
+		$this->client      = new Client(self::BASE_URI);
 	}
 
 	/**
@@ -46,9 +41,9 @@ class Api
 	 */
 	public function getCampaigns(array $params = []): array
 	{
-		$response = $this->client->request(
-			'GET',
+		$response = $this->client->get(
 			'/GetCampaign',
+			['Accept' => 'application/json'],
 			[
 				'api_key'      => $this->apiKey,
 				'affiliate_id' => $this->affiliateId
