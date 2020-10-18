@@ -41,14 +41,14 @@ class Api
 	 */
 	public function getCampaigns(array $params = []): array
 	{
+		$httpquery = http_build_query([
+				'api_key'      => $this->apiKey,
+				'affiliate_id' => $this->affiliateId
+			] + $params);
 		$options = [
 			'headers' => ['Accept' => 'application/json'],
-			'params'  => [
-					'api_key'      => $this->apiKey,
-					'affiliate_id' => $this->affiliateId
-				] + $params,
 		];
-		$response = $this->client->get(self::BASE_URI . '/GetCampaign', $options)->getBody();
+		$response = $this->client->get(self::BASE_URI . '/GetCampaign?' . $httpquery, $options)->getBody();
 		$result = json_decode($response, true);
 
 		if (false === $result)
